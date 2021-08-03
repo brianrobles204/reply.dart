@@ -2,7 +2,7 @@ part of reply;
 
 class _DefaultConclusionBuilder<Q, R, T extends Recorder<Q, R>>
     implements ConclusionBuilder<Q, R, T> {
-  final Recorder<Q, R> _recorder;
+  final T _recorder;
   final Q _request;
   final R _response;
 

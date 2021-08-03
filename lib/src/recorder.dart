@@ -4,7 +4,7 @@ class _DefaultRecorder<Q, R> implements Recorder<Q, R> {
   final Equality<Q> _requestEquality;
   final List<Record<Q, R>> _records = <Record<Q, R>>[];
 
-  _DefaultRecorder({Equality<Q> requestEquality})
+  _DefaultRecorder({Equality<Q>? requestEquality})
       : _requestEquality = requestEquality ?? IdentityEquality() {
     assert(_requestEquality != null);
   }

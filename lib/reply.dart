@@ -41,7 +41,7 @@ abstract class Recorder<Q, R> {
   /// Optionally specify how request object [Q] should be identified.
   factory Recorder({
     /// Optionally specify how a request [Q] should be considered equal.
-    Equality<Q> requestEquality,
+    Equality<Q>? requestEquality,
   }) =>
       _DefaultRecorder<Q, R>(requestEquality: requestEquality);
 
@@ -66,16 +66,16 @@ abstract class Recording<Q, R> {
   /// Optionally specify how a request [Q] should be considered equal.
   factory Recording(
     Iterable<Record<Q, R>> records, {
-    Equality<Q> requestEquality,
+    Equality<Q>? requestEquality,
   }) =>
       _DefaultRecording(records, requestEquality: requestEquality);
 
   /// Return a new set of records by decoding JSON [data].
   factory Recording.fromJson(
     Iterable<Map<String, dynamic>> data, {
-    Q toRequest(request),
-    R toResponse(response),
-    Equality<Q> requestEquality,
+    required Q toRequest(request),
+    required R toResponse(response),
+    Equality<Q>? requestEquality,
   }) {
     return Recording(
       data.map((r) => _DefaultRecord(
@@ -99,8 +99,8 @@ abstract class Recording<Q, R> {
   ///
   /// Uses [encodeRequest] and [encodeResponse] to handle further encoding.
   toJsonEncodable({
-    encodeRequest(Q request),
-    encodeResponse(R response),
+    required encodeRequest(Q request),
+    required encodeResponse(R response),
   });
 }
 
@@ -126,7 +126,7 @@ abstract class ResponseBuilder<Q, R> {
   ///     recorder.reply('Hello'); // I already said hi...
   ConclusionBuilder<Q, R, Recorder<Q, R>> reply(
     R response, {
-    void andBranch(Branch<Q, R> branch),
+    void andBranch(Branch<Q, R> branch)?,
   });
 }
 

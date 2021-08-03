@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Simple request/response', () {
-    Recorder<String, String> recorder;
+    late Recorder<String, String> recorder;
     const int notInfiniteButALot = 100;
     setUp(() => recorder = Recorder<String, String>());
 
@@ -66,7 +66,7 @@ void main() {
         },
       ]);
       expect(jsonDecode(jsonEncode(json)), json);
-      final copy = Recording<String, String>.fromJson(
+      final copy = Recording<String?, String?>.fromJson(
         json,
         toRequest: (q) => q,
         toResponse: (r) => r,
@@ -77,7 +77,7 @@ void main() {
   });
 
   group('Custom equality', () {
-    Recorder<_CustomRequest, String> recorder;
+    late Recorder<_CustomRequest, String> recorder;
 
     setUp(() {
       recorder = Recorder<_CustomRequest, String>(
@@ -115,5 +115,5 @@ class _CustomRequestEquality implements Equality<_CustomRequest> {
   int hash(_CustomRequest e) => e.idNumber;
 
   @override
-  bool isValidKey(Object o) => o is _CustomRequest;
+  bool isValidKey(Object? o) => o is _CustomRequest;
 }
