@@ -17,13 +17,13 @@ class _DefaultRecorder<Q, R> implements Recorder<Q, R> {
   @override
   ResponseBuilder<Q, R> given(Q request) {
     if (request == null) {
-      throw new ArgumentError.notNull('request');
+      throw ArgumentError.notNull('request');
     }
-    return new _DefaultResponseBuilder(this, request);
+    return _DefaultResponseBuilder(this, request);
   }
 
   @override
   Recording<Q, R> toRecording() {
-    return new Recording(_records, requestEquality: _requestEquality);
+    return Recording(_records, requestEquality: _requestEquality);
   }
 }

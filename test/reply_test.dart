@@ -8,7 +8,7 @@ void main() {
   group('Simple request/response', () {
     Recorder<String, String> recorder;
     const int notInfiniteButALot = 100;
-    setUp(() => recorder = new Recorder<String, String>());
+    setUp(() => recorder = Recorder<String, String>());
 
     test('should support responding once', () {
       recorder.given('Hello').reply('Hi there!').once();
@@ -66,7 +66,7 @@ void main() {
         },
       ]);
       expect(jsonDecode(jsonEncode(json)), json);
-      final copy = new Recording<String, String>.fromJson(
+      final copy = Recording<String, String>.fromJson(
         json,
         toRequest: (q) => q,
         toResponse: (r) => r,
@@ -80,16 +80,16 @@ void main() {
     Recorder<_CustomRequest, String> recorder;
 
     setUp(() {
-      recorder = new Recorder<_CustomRequest, String>(
+      recorder = Recorder<_CustomRequest, String>(
         requestEquality: const _CustomRequestEquality(),
       );
     });
 
     test('should be used to determine request matches', () {
-      recorder.given(new _CustomRequest(123, 'A')).reply('Hello').once();
+      recorder.given(_CustomRequest(123, 'A')).reply('Hello').once();
       final recording = recorder.toRecording();
       expect(
-        recording.hasRecord(new _CustomRequest(123, 'B')),
+        recording.hasRecord(_CustomRequest(123, 'B')),
         isTrue,
       );
     });

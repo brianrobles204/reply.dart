@@ -24,7 +24,7 @@ class _DefaultRecording<Q, R> implements Recording<Q, R> {
         return _replyAt(i);
       }
     }
-    throw new StateError('No record found for $request.');
+    throw StateError('No record found for $request.');
   }
 
   R _replyAt(int index) {

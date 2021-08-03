@@ -15,29 +15,18 @@ class _DefaultConclusionBuilder<Q, R, T extends Recorder<Q, R>>
   @override
   T always() {
     return _recorder
-      ..addRecord(new _DefaultRecord(
-        _request,
-        _response,
-        always: true,
-      ));
+      ..addRecord(_DefaultRecord(_request, _response, always: true));
   }
 
   @override
   T once() {
-    return _recorder
-      ..addRecord(new _DefaultRecord(
-        _request,
-        _response,
-      ));
+    return _recorder..addRecord(_DefaultRecord(_request, _response));
   }
 
   @override
   T times(int times) {
     for (var i = 0; i < times; i++) {
-      _recorder.addRecord(new _DefaultRecord(
-        _request,
-        _response,
-      ));
+      _recorder.addRecord(_DefaultRecord(_request, _response));
     }
     return _recorder;
   }

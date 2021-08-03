@@ -12,12 +12,12 @@ class _DefaultResponseBuilder<Q, R> implements ResponseBuilder<Q, R> {
     void andBranch(Branch<Q, R> branch),
   }) {
     if (andBranch != null) {
-      throw new UnimplementedError();
+      throw UnimplementedError();
     }
     if (response == null) {
-      throw new ArgumentError.notNull('response');
+      throw ArgumentError.notNull('response');
     }
-    return new _DefaultConclusionBuilder(
+    return _DefaultConclusionBuilder(
       _recorder,
       _request,
       response,
