@@ -41,7 +41,7 @@ abstract class Recorder<Q, R> {
   /// Optionally specify how request object [Q] should be identified.
   factory Recorder({
     /// Optionally specify how a request [Q] should be considered equal.
-    Equality<Q> requestEquality: const IdentityEquality(),
+    Equality<Q> requestEquality,
   }) =>
       new _DefaultRecorder<Q, R>(requestEquality: requestEquality);
 
@@ -66,22 +66,23 @@ abstract class Recording<Q, R> {
   /// Optionally specify how a request [Q] should be considered equal.
   factory Recording(
     Iterable<Record<Q, R>> records, {
-    Equality<Q> requestEquality: const IdentityEquality(),
+    Equality<Q> requestEquality,
   }) =>
       new _DefaultRecording(records, requestEquality: requestEquality);
 
   /// Return a new set of records by decoding JSON [data].
-  factory Recording.fromJson(Iterable<Map<String, dynamic>> data, {
+  factory Recording.fromJson(
+    Iterable<Map<String, dynamic>> data, {
     Q toRequest(request),
     R toResponse(response),
-    Equality<Q> requestEquality: const IdentityEquality(),
+    Equality<Q> requestEquality,
   }) {
     return new Recording(
       data.map((r) => new _DefaultRecord(
-        toRequest(r['request']),
-        toResponse(r['response']),
-        always: r['always'] == true,
-      )),
+            toRequest(r['request']),
+            toResponse(r['response']),
+            always: r['always'] == true,
+          )),
       requestEquality: requestEquality,
     );
   }

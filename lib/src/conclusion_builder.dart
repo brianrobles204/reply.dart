@@ -53,5 +53,5 @@ class _DefaultRecord<Q, R> implements Record<Q, R> {
   @override
   final R response;
 
-  const _DefaultRecord(this.request, this.response, {this.always: false});
+  const _DefaultRecord(this.request, this.response, {this.always = false});
 }

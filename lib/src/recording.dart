@@ -6,10 +6,9 @@ class _DefaultRecording<Q, R> implements Recording<Q, R> {
 
   _DefaultRecording(
     Iterable<Record<Q, R>> records, {
-    Equality<Q> requestEquality: const IdentityEquality(),
-  })
-      : _records = records.toList(),
-        _requestEquality = requestEquality {
+    Equality<Q> requestEquality,
+  })  : _records = records.toList(),
+        _requestEquality = requestEquality ?? IdentityEquality() {
     assert(_requestEquality != null);
   }
 
@@ -40,11 +39,12 @@ class _DefaultRecording<Q, R> implements Recording<Q, R> {
   toJsonEncodable({
     encodeRequest(Q request),
     encodeResponse(R response),
-  }) => _records.map((record) {
-    return {
-      'always': record.always,
-      'request': encodeRequest(record.request),
-      'response': encodeResponse(record.response),
-    };
-  }).toList();
+  }) =>
+      _records.map((record) {
+        return {
+          'always': record.always,
+          'request': encodeRequest(record.request),
+          'response': encodeResponse(record.response),
+        };
+      }).toList();
 }

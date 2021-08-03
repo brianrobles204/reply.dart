@@ -45,9 +45,9 @@ void main() {
           .reply('You are welcome!')
           .always();
       final json = recorder.toRecording().toJsonEncodable(
-        encodeRequest: (q) => q,
-        encodeResponse: (r) => r,
-      );
+            encodeRequest: (q) => q,
+            encodeResponse: (r) => r,
+          );
       expect(json, [
         {
           'always': false,
@@ -65,7 +65,7 @@ void main() {
           'response': 'You are welcome!',
         },
       ]);
-      expect(JSON.decode(JSON.encode(json)), json);
+      expect(jsonDecode(jsonEncode(json)), json);
       final copy = new Recording<String, String>.fromJson(
         json,
         toRequest: (q) => q,
