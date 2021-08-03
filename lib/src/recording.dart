@@ -8,9 +8,7 @@ class _DefaultRecording<Q, R> implements Recording<Q, R> {
     Iterable<Record<Q, R>> records, {
     Equality<Q>? requestEquality,
   })  : _records = records.toList(),
-        _requestEquality = requestEquality ?? IdentityEquality() {
-    assert(_requestEquality != null);
-  }
+        _requestEquality = requestEquality ?? IdentityEquality();
 
   @override
   bool hasRecord(Q request) {
