@@ -9,7 +9,7 @@ class _DefaultResponseBuilder<Q, R> implements ResponseBuilder<Q, R> {
   @override
   ConclusionBuilder<Q, R, Recorder<Q, R>> reply(
     R response, {
-    void andBranch(Branch<Q, R> branch)?,
+    void Function(Branch<Q, R> branch)? andBranch,
   }) {
     if (andBranch != null) {
       throw UnimplementedError();

@@ -34,9 +34,9 @@ class _DefaultRecording<Q, R> implements Recording<Q, R> {
   }
 
   @override
-  toJsonEncodable({
-    required encodeRequest(Q request),
-    required encodeResponse(R response),
+  dynamic toJsonEncodable({
+    required Function(Q request) encodeRequest,
+    required Function(R response) encodeResponse,
   }) =>
       _records.map((record) {
         return {

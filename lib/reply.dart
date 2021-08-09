@@ -73,8 +73,8 @@ abstract class Recording<Q, R> {
   /// Return a new set of records by decoding JSON [data].
   factory Recording.fromJson(
     Iterable<Map<String, dynamic>> data, {
-    required Q toRequest(request),
-    required R toResponse(response),
+    required Q Function(dynamic request) toRequest,
+    required R Function(dynamic response) toResponse,
     Equality<Q>? requestEquality,
   }) {
     return Recording(
@@ -98,9 +98,9 @@ abstract class Recording<Q, R> {
   /// Returns a JSON serializable object from this set of recordings.
   ///
   /// Uses [encodeRequest] and [encodeResponse] to handle further encoding.
-  toJsonEncodable({
-    required encodeRequest(Q request),
-    required encodeResponse(R response),
+  dynamic toJsonEncodable({
+    required Function(Q request) encodeRequest,
+    required Function(R response) encodeResponse,
   });
 }
 
@@ -126,7 +126,7 @@ abstract class ResponseBuilder<Q, R> {
   ///     recorder.reply('Hello'); // I already said hi...
   ConclusionBuilder<Q, R, Recorder<Q, R>> reply(
     R response, {
-    void andBranch(Branch<Q, R> branch)?,
+    void Function(Branch<Q, R> branch)? andBranch,
   });
 }
 

@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() {
   group('Simple request/response', () {
     late Recorder<String, String> recorder;
-    const int notInfiniteButALot = 100;
+    const notInfiniteButALot = 100;
     setUp(() => recorder = Recorder<String, String>());
 
     test('should support responding once', () {
